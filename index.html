@@ -7,7 +7,7 @@
 <section class="card hide" id="closestPanel"><h2>🎯 Closest Chord Challenge</h2><p class="small muted">Four chords, randomized every round. All six strings are displayed; practice notes are selectable on your chosen three-string group. Green rings show your previous voicing; select the next chord with the least movement. Blue rings reveal the nearest answer after checking.</p><div class="row"><button id="closestNew" class="primary">Shuffle new round</button><button id="closestCheck" class="primary">Check voicing</button><button id="closestReveal">Show nearest</button><button id="closestNext" disabled>Next chord →</button></div><div id="closestSteps" class="closest-steps"></div><div id="closestTask" class="task"></div><div id="closestInfo" class="closest-metric"></div><div class="closest-scroll"><div id="closestBoard" class="closest-board"></div></div><div id="closestFeedback" class="feedback" aria-live="polite"></div><div id="closestStats" class="small muted"></div></section><section class="card"><div class="stage" id="stage">Triad</div><div id="chords" class="row"></div><div id="task" class="task"></div><div id="detail" class="muted small"></div><div class="row"><button id="rootHint">Root hint</button><button id="shapeHint">Triad hint</button><button id="reveal">Show answer</button><button id="clear">Clear</button></div><div id="hint" class="small muted"></div></section>
 <section class="card"><div class="fscroll"><div class="fretboard" id="board"></div></div><div class="legend"><span class="dot"></span>Selected note &nbsp; <span class="dot scaleDot"></span>Pentatonic note &nbsp; Blue ring = root</div><div class="row"><button id="check" class="primary">Check triad</button><button id="skip">Skip this step</button></div><div id="feedback" class="feedback" aria-live="polite"></div></section>
 <section class="card hide" id="scalePanel"><h2>Connect the pentatonic</h2><div class="small muted" id="scaleIntro"></div><div class="grid" id="shapeButtons"></div><div class="row"><button id="chordOverlay" type="button">Show chord tones in pattern</button></div><div id="chordOverlayHelp" class="small muted">Select a shape, then show the root, third and fifth within that pattern. CAGED reference sequence: Shape 1 = C, Shape 2 = A, Shape 3 = G, Shape 4 = E, Shape 5 = D.</div><div class="row"><button id="scaleHint">Shape hint</button><button id="checkScale" class="primary">Check shape</button><button id="playScale">Play pattern ♪</button><button id="next" class="primary" disabled>Next →</button></div><div id="scaleFeedback" class="feedback"></div></section>
-<section class="card" id="micPanel"><h2>🎸 Guitar Controller <span style="font-size:12px;color:#9ba5ae">BETA</span></h2><div class="row"><button id="micToggle" class="primary">🎙 Start listening</button><label><input type="checkbox" id="autoCheck" checked> Auto-check triad</label></div><div id="micStatus" class="small muted" aria-live="polite">Play one note at a time. Adjustable sensitivity (default 8/10) and full-resolution pitch detection for phone and iPad microphones. Microphone permission requires HTTPS or localhost.</div><div class="row" style="align-items:center;gap:10px;flex-wrap:wrap"><label for="micSensitivity">Mic sensitivity</label><input id="micSensitivity" type="range" min="1" max="10" value="8" step="1" style="flex:1;min-width:120px;max-width:230px"><strong id="micSensitivityValue">8 / 10</strong></div><div class="small muted">Higher sensitivity helps with quiet guitar notes, but may also pick up room noise. Start at 8; try 9–10 from farther away.</div><div id="micDiagnostics" class="small muted" aria-live="polite">Input level: — · Waiting for microphone</div><div id="heard" style="font-size:25px;font-weight:800;margin-top:8px">—</div><div class="small muted">A pitch may exist on multiple strings. All matching positions on the six-string fretboard flash green. Exercise auto-selection still follows the assigned string group. Green flash = heard note. Highlights now disappear when a note stops ringing. For best accuracy, pick one note at a time.</div></section><section class="card"><h2>Session progress</h2><div id="stats" class="stat"></div><div class="small muted">Pattern geometry and fret offsets are mapped to the correct CAGED buttons (C, A, G, E, D). The overlay identifies chord tones, not a complete movable CAGED chord grip. A triad can overlap more than one position; the app accepts any fully containing shape. The diagram shows a reference-position scale and highlights its relationship to your chosen voicing.</div></section>
+<section class="card" id="micPanel"><h2>🎸 Guitar Controller <span style="font-size:12px;color:#9ba5ae">BETA</span></h2><div class="row"><button id="micToggle" class="primary">🎙 Start listening</button><label><input type="checkbox" id="autoCheck" checked> Auto-check triad</label></div><div id="micStatus" class="small muted" aria-live="polite">Play one note at a time. Adjustable sensitivity (default 8/10) and improved YIN pitch detection for phone and iPad microphones. Microphone permission requires HTTPS or localhost.</div><div class="row" style="align-items:center;gap:10px;flex-wrap:wrap"><label for="micSensitivity">Mic sensitivity (move slider right for quieter playing)</label><input id="micSensitivity" type="range" min="1" max="10" value="8" step="1" style="flex:1;min-width:120px;max-width:230px"><strong id="micSensitivityValue">8 / 10</strong></div><div class="small muted">Move the slider toward 10 for quieter playing. This control is directly below Start listening in the Guitar Controller (BETA) panel. Pitch accuracy is independent of sensitivity.</div><div id="micDiagnostics" class="small muted" aria-live="polite">Input level: — · Waiting for microphone</div><div id="heard" style="font-size:25px;font-weight:800;margin-top:8px">—</div><div class="small muted">A pitch may exist on multiple strings. All matching positions on the six-string fretboard flash green. Exercise auto-selection still follows the assigned string group. Green flash = heard note. Highlights now disappear when a note stops ringing. For best accuracy, pick one note at a time.</div></section><section class="card"><h2>Session progress</h2><div id="stats" class="stat"></div><div class="small muted">Pattern geometry and fret offsets are mapped to the correct CAGED buttons (C, A, G, E, D). The overlay identifies chord tones, not a complete movable CAGED chord grip. A triad can overlap more than one position; the app accepts any fully containing shape. The diagram shows a reference-position scale and highlights its relationship to your chosen voicing.</div></section>
 </main><script>
 (()=>{'use strict';const N=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'],open=[4,9,2,7,11,4],strings=['E','A','D','G','B','e'],groups=[[0,1,2],[1,2,3],[2,3,4],[3,4,5]];const SHAPES={1:[[0,3],[0,3],[0,2],[0,2],[1,3],[0,3]],2:[[1,3],[1,3],[0,3],[0,3],[1,3],[1,3]],3:[[0,3],[0,2],[0,2],[0,2],[0,3],[0,3]],4:[[1,3],[0,3],[0,3],[0,2],[1,3],[1,3]],5:[[1,3],[1,3],[1,3],[0,3],[1,4],[1,3]]},LEFT={1:7,2:9,3:0,4:2,5:4},CAGED=['','C','A','G','E','D'];const $=id=>document.getElementById(id);let mode='all',chords=[],ci=0,inv=0,phase='triad',sel={},saved=null,chosenShape=null,scaleShown=null,accepted=[],correct=0,attempts=0,completed=0,audio=null,prev=null,answers=[],overlay=false;
 const mod=n=>(n%12+12)%12,pc=(s,f)=>mod(open[s]+f),group=()=>groups[+$('group').value],range=()=>({'1':[1,15],'2':[1,7],'3':[5,12],'4':[8,15]})[$('range').value],labelNote=p=>N[p],tone=(ch)=>[ch.root,mod(ch.root+(ch.minor?3:4)),mod(ch.root+7)];
@@ -32,44 +32,59 @@ $('modeAll').onclick=()=>{mode='all';$('modeAll').classList.add('active');$('mod
 (()=>{'use strict';let ctx,stream,source,analyser,buffer,raf=0,lastFrame=0,running=false,lastMidi=null,stable=0,lastAccepted=-1,lastAt=0,liveMidi=null,seen=new Set(),phaseId='',lastAuto=0;
 const $=id=>document.getElementById(id),openMidi=[40,45,50,55,59,64];
 function pitch(data,sampleRate){
-// Full-resolution YIN: a downsampled lag grid can shift weak notes sharp.
-// Remove DC, compute RMS, and use normalized difference with parabolic refinement.
+// YIN difference function + cumulative mean normalized difference (CMNDF).
+// Compare enough samples at EVERY lag; the previous short comparison window
+// gave unstable troughs for quieter notes and could bias estimates sharp.
 const n=data.length,rate=sampleRate;
 let mean=0;for(let i=0;i<n;i++)mean+=data[i];mean/=n;
-let rms=0;for(let i=0;i<n;i++){let v=data[i]-mean;rms+=v*v;}
-rms=Math.sqrt(rms/n);window.__guitarRms=rms;
+let power=0;for(let i=0;i<n;i++){let x=data[i]-mean;power+=x*x;}
+const rms=Math.sqrt(power/n);window.__guitarRms=rms;
 const sensitivity=Number($('micSensitivity')?.value||8);
-const gate=0.0009*Math.pow(0.66,sensitivity-5);
+const gate=0.00055*Math.pow(0.72,sensitivity-5);
 if(rms<gate){window.__guitarPitchReason='quiet / released';return null;}
-const minLag=Math.floor(rate/1050),maxLag=Math.min(Math.ceil(rate/77),Math.floor(n/2)-3);
-const count=Math.min(1050,n-maxLag-2);
+const minLag=Math.floor(rate/900),maxLag=Math.min(Math.ceil(rate/78),Math.floor(n/3));
+// Use 2048 comparisons, spread over the first 3k samples, consistently
+// across all lags. Using a constant window prevents lag-dependent bias.
+const comparisons=Math.min(1536,n-maxLag-2);
 const diff=new Float64Array(maxLag+2),cmnd=new Float64Array(maxLag+2);
 for(let lag=1;lag<=maxLag+1;lag++){
- let sum=0;for(let i=0;i<count;i++){let d=data[i]-data[i+lag];sum+=d*d;}
+ let sum=0;
+ for(let i=0;i<comparisons;i++){
+  const d=data[i]-data[i+lag];sum+=d*d;
+ }
  diff[lag]=sum;
 }
-let total=0,best=0,bestScore=Infinity;
-for(let lag=1;lag<=maxLag;lag++){
+let total=0;
+for(let lag=1;lag<=maxLag+1;lag++){
  total+=diff[lag];cmnd[lag]=total>0?diff[lag]*lag/total:1;
- if(lag<minLag)continue;
- if(cmnd[lag]<bestScore){bestScore=cmnd[lag];best=lag;}
- if(cmnd[lag]<0.17){
-  while(lag+1<=maxLag&&cmnd[lag+1]<cmnd[lag])lag++;
+}
+// Locate the first meaningful local trough. Its bottom, not its leading
+// edge, is the period estimate. A global minimum can pick an octave error.
+let best=0,bestScore=1;
+const threshold=0.14;
+for(let lag=minLag;lag<=maxLag;lag++){
+ if(cmnd[lag]<threshold && cmnd[lag]<=cmnd[lag-1]){
+  while(lag<maxLag && cmnd[lag+1]<cmnd[lag])lag++;
   best=lag;bestScore=cmnd[lag];break;
  }
 }
-const qualityLimit=0.25+0.015*sensitivity;
+if(!best){
+ for(let lag=minLag+1;lag<maxLag;lag++){
+  if(cmnd[lag]<cmnd[lag-1] && cmnd[lag]<=cmnd[lag+1] && cmnd[lag]<bestScore){best=lag;bestScore=cmnd[lag];}
+ }
+}
+const qualityLimit=0.25+0.012*sensitivity;
 if(!best||bestScore>qualityLimit){window.__guitarPitchReason='unclear pitch ('+bestScore.toFixed(2)+')';return null;}
 let refined=best;
 if(best>1&&best<maxLag){
- let a=cmnd[best-1],b=cmnd[best],c=cmnd[best+1],denom=a-2*b+c;
- if(Math.abs(denom)>1e-10)refined+=Math.max(-0.5,Math.min(0.5,0.5*(a-c)/denom));
+ const a=cmnd[best-1],b=cmnd[best],c=cmnd[best+1],denom=a-2*b+c;
+ if(Math.abs(denom)>1e-12)refined+=Math.max(-0.5,Math.min(0.5,0.5*(a-c)/denom));
 }
 const hz=rate/refined,m=69+12*Math.log2(hz/440),midi=Math.round(m);
 if(!Number.isFinite(m)||midi<40||midi>88){window.__guitarPitchReason='outside guitar range';return null;}
 const cents=Math.round((m-midi)*100);
-if(Math.abs(cents)>38){window.__guitarPitchReason='between notes ('+cents+' cents)';return null;}
-window.__guitarPitchReason='pitch ('+(cents>=0?'+':'')+cents+' cents)';
+if(Math.abs(cents)>42){window.__guitarPitchReason='between notes ('+cents+' cents)';return null;}
+window.__guitarPitchReason='YIN confidence '+Math.round((1-bestScore)*100)+'% · '+(cents>=0?'+':'')+cents+' cents';
 return {midi,hz,rms,confidence:1-bestScore};
 }
 function boardCandidates(m){let result=[];document.querySelectorAll('#board button[data-s][data-f]').forEach(b=>{let s=+b.dataset.s,f=+b.dataset.f;if(openMidi[s]+f===m)result.push({s,f,b,active:b.classList.contains('inGroup'),scale:b.classList.contains('scale')});});return result;}
@@ -89,14 +104,14 @@ function clearLive(){
 function tick(time){
  if(!running)return;
  raf=requestAnimationFrame(tick);
- if(time-lastFrame<45)return;lastFrame=time;
+ if(time-lastFrame<55)return;lastFrame=time;
  analyser.getFloatTimeDomainData(buffer);
  let p=pitch(buffer,ctx.sampleRate),level=window.__guitarRms||0;
  if(!p&&level<.002)noiseFloor=.995*noiseFloor+.005*level;
  // Require a clear attack above the room noise before accepting a new note.
  const sensitivity=Number($('micSensitivity').value);
- const gate=0.0009*Math.pow(0.66,sensitivity-5);
- const audible=p&&level>Math.max(gate,noiseFloor*(1.6-0.065*sensitivity));
+ const gate=0.00055*Math.pow(0.72,sensitivity-5);
+ const audible=p&&level>Math.max(gate,noiseFloor*(1.5-0.055*sensitivity));
  $('micDiagnostics').textContent='Input level: '+Math.round(level*10000)+' / 10000 · '+(window.__guitarPitchReason||'waiting')+(p?' · '+p.hz.toFixed(1)+' Hz':'');
  if(audible){
   lastHeardAt=time;
